@@ -1,7 +1,8 @@
 html
 	head
 		title Dogstagram
-		link( rel="stylesheet" type="text/css" href="/css/pico.min.css")
+		link(rel="stylesheet" type="text/css" href="/css/pico.min.css")
+		link(rel="stylesheet" type="text/css" href="/css/main.css")
 	body(class="container-fluid")
 		header 
 			nav
@@ -17,9 +18,11 @@ html
 						a(href="#", role="button") Login
 
 		main(class="container")
-			each dog in dogs
+			each post in posts
 				article
-					header= dog.name
-					img(src=dog.image_src, alt="A Good Dog", class="centered")
-					footer= dog.breed
+					header= post.title
+					div(class="container")
+						img(src=post.image, alt="A Good Dog", class="centered")
+						div= post.body
+					footer= post.date
 		footer Bringing you the nicest dogs

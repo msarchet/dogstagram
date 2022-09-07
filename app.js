@@ -1,27 +1,29 @@
-const express = require('express')
-
+const express = require("express")
+const path = require("path")
+const { GetData } = require("./data/repository")
 const app = express()
 
 const port = process.env.port || 8080
+const profile = require("./api/routes/profile")
 
-const data = { 
-	dogs: [
-		{ name: 'Sauce', image_src: 'https://placedog.net/200'},
-		{ name: 'Bingo' , image_src: 'https://placedog.net/200'},
-		{ name: 'Kirby', image_src: "https://placedog.net/200"},
-		{ name: 'Pestilence', image_src: "https://placedog.net/200"}
-	]
-}
+// set up some stuff
+app.use(express.static(__dirname + "/public"))
+app.set("view engine", "pug")
+app.set("views", "./views")
+app.locals.basedir = path.join(__dirname, "views")
 
-app.use(express.static(__dirname + '/public'))
-
-app.set('view engine', 'pug')
-app.set('views', './views')
-
-app.get('/', (req, res) => {
-	res.render('index', data)
+// render our home page
+app.get("/", (req, res) => {
+  res.render("index", GetData())
 })
 
+// setup profile
+app.use("/profile", profile)
+
+// setup posts
+
+// setup login
+
 app.listen(port, () => {
-	console.log(`Server is listening on ${port}`)
+  console.log(`Server is listening on ${port}`)
 })
