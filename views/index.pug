@@ -1,0 +1,25 @@
+html
+	head
+		title Dogstagram
+		link( rel="stylesheet" type="text/css" href="/css/pico.min.css")
+	body(class="container-fluid")
+		header 
+			nav
+				ul
+					li 
+						strong Dogstagram
+				ul
+					li
+						a(href="#") Friends
+					li
+						a(href="#") Profile
+					li
+						a(href="#", role="button") Login
+
+		main(class="container")
+			each dog in dogs
+				article
+					header= dog.name
+					img(src=dog.image_src, alt="A Good Dog", class="centered")
+					footer= dog.breed
+		footer Bringing you the nicest dogs
